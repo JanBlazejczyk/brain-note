@@ -3,11 +3,16 @@
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
 
+const defaultContent = {
+  type: "doc",
+  content: [{ type: "heading", attrs: { level: 1 } }, { type: "paragraph" }],
+};
+
 export async function createDocument() {
   const supabase = await createClient();
   const { data } = await supabase
     .from("documents")
-    .insert({ title: "Untitled", content: {} })
+    .insert({ title: "Untitled", content: defaultContent })
     .select()
     .single();
 
