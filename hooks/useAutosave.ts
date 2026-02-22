@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useRef } from "react";
-import { saveDocument } from "@/app/actions";
+import { updateDocument } from "@/app/actions";
 
 export function useAutosave(id: string, delay = 500) {
   const timer = useRef<NodeJS.Timeout>(null);
@@ -9,8 +9,9 @@ export function useAutosave(id: string, delay = 500) {
   const save = useCallback(
     (title: string, content: object) => {
       if (timer.current) clearTimeout(timer.current);
+
       timer.current = setTimeout(() => {
-        saveDocument(id, title, content);
+        updateDocument(id, title, content);
       }, delay);
     },
     [id, delay]
