@@ -1,6 +1,8 @@
+import type { JSONContent } from "@tiptap/core";
+
 export interface Document {
   id: string;
   title: string;
-  content: object;
+  content: JSONContent;
   updated_at: string;
 }
